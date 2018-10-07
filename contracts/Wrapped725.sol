@@ -9,15 +9,15 @@ contract Wrapped725 is ERC721 {
 
     bytes32 public KEY = keccak256(address(this));
 
-    modifier onlyTokenHolder() {
-        require(msg.sender == ERC721.ownerOf(_token));
+    modifier onlyTokenHolder(uint256 _token) {
+        require(msg.sender == ownerOf(_token));
         _;
     }
 
     /// mint/burn Functions ///
 
     function mintIdentityToken(address _identity) public {
-        ERC725 memory identity = ERC725(_identity);
+        ERC725 identity = ERC725(_identity);
         uint256 token = uint256(_identity);
 
         // check for permission
@@ -33,11 +33,11 @@ contract Wrapped725 is ERC721 {
 
         // mint721
         nftToIdentity[token] = _identity;
-        ERC721._mint(msg.sender,token);
+        _mint(msg.sender, token);
     }
 
     function burnIdentityToken(uint256 _token, address _newOwner) public onlyTokenHolder {
-        ERC725 memory identity = ERC725(nftToIdentity[_identity]);
+        ERC725 identity = ERC725(nftToIdentity[_token]);
 
         // check for permission
         require(identity.keyHasPurpose(KEY,1));
@@ -47,14 +47,14 @@ contract Wrapped725 is ERC721 {
 
         // burn721
         delete nftToIdentity[_token];
-        ERC721._burn(msg.sender,_token);
+        _burn(msg.sender, _token);
     }
 
     /// 725 Functions ///
 
     function addKey(uint256 _token, bytes32 _key, uint256 _purpose, uint256 _keyType) public onlyTokenHolder returns (bool success) {
         require(_purpose != 1);
-        return ERC725(nftToIdentity[_token]).addKey(_key, _purpose, _type);
+        return ERC725(nftToIdentity[_token]).addKey(_key, _purpose, _keyType);
     }
 
     function removeKey(uint256 _token, bytes32 _key, uint256 _purpose) public onlyTokenHolder returns (bool success) {
