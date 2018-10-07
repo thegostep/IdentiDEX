@@ -2,4 +2,3 @@
 * text=auto
 # force code files to not be crlf'd
 *.sol text linguist-language=Solidity eol=lf
-*.py text eol=lf 
