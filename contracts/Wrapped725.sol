@@ -7,14 +7,10 @@ contract Wrapped725 is ERC721 {
 
     mapping(uint256 => address) nftToIdentity;
 
-    bytes32 public KEY
-
-    constructor() {
-        KEY = keccak256(address(this));
-    }
+    bytes32 public KEY = keccak256(address(this));
 
     modifier onlyTokenHolder() {
-        require(msg.sender == ownerOf(_token));
+        require(msg.sender == ERC721.ownerOf(_token));
         _;
     }
 
@@ -37,7 +33,7 @@ contract Wrapped725 is ERC721 {
 
         // mint721
         nftToIdentity[token] = _identity;
-        _mint(msg.sender,token);
+        ERC721._mint(msg.sender,token);
     }
 
     function burnIdentityToken(uint256 _token, address _newOwner) public onlyTokenHolder {
@@ -51,7 +47,7 @@ contract Wrapped725 is ERC721 {
 
         // burn721
         delete nftToIdentity[_token];
-        _burn(msg.sender,_token);
+        ERC721._burn(msg.sender,_token);
     }
 
     /// 725 Functions ///
