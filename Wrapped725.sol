@@ -50,7 +50,7 @@ contract Wrapped725 is ERC721 {
         require(identity.addKey(keccak256(_newOwner),1));
 
         // burn721
-        delete nftToIdentity[token];
+        delete nftToIdentity[_token];
         _burn(msg.sender,_token);
     }
 
