@@ -3,7 +3,7 @@ pragma solidity ^0.4.24;
 import "./ERC725.sol";
 import "openzeppelin-solidity/contracts/token/ERC721/ERC721BasicToken.sol";
 
-contract Wrapped725 is ERC721BasicToken {
+contract IdentityToken is ERC721BasicToken {
 
     mapping(uint256 => address) nftToIdentity;
 
