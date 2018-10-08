@@ -1,0 +1,11 @@
+{
+  "name": "IdentiDEX",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/thegostep/IdentiDEX.git",
+  "author": "s.gosselin@queensu.ca",
+  "license": "MIT",
+  "dependencies": {
+    "openzeppelin-solidity": "^1.12.0"
+  }
+}
